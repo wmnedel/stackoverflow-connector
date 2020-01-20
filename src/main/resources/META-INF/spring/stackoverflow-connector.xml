@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  
+  
+      <bean parent="jobSchedulingBean">
+        <property name="ramJob" value="false"/>
+        <property name="trigger">
+            <bean class="org.quartz.CronTrigger">
+                <property name="name" value="ReferentielJobTrigger"/>
+                <property name="cronExpression" value="${topPagesCronExp:0 0/1 * * * ?}"/>
+            </bean>
+        </property>
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.JobDetailBean">
+                <property name="name" value="slacknotification"/>
+                <property name="group" value="StackOverflowJahia"/>
+                <property name="jobClass" value="org.jahia.modules.stackoverflow.SlackNotificationJob"/>
+                <property name="description" value="Job to search for stackoverflow unanswered questions with configured tag and notify in Slack" />
+                <property name="jobDataAsMap">
+                    <map>
+                        <entry key="slackUrl" value="https://hooks.slack.com/services/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" />
+                        <entry key="stackApiURL" value="api.stackexchange.com" />
+                        <entry key="tag" value="jahia" />
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

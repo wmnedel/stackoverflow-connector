@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
+    <modules jcr:primaryType="jnt:modules">
+        <stackoverflow-connector j:dependencies="default"
+                               j:modulePriority="0"
+                               j:moduleType="module"
+                               j:title="stackoverflow-connector"
+                               jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                               jcr:primaryType="jnt:module">
+                <sources jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                  jcr:primaryType="jnt:moduleVersionFolder"
+                  j:staticMountPointProviderKey="module-stackoverflow-connector-1.0-SNAPSHOT">
+                    <src jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                 jcr:primaryType="jnt:folder">
+                        <main jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                     jcr:primaryType="jnt:folder">
+                            <resources jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                             jcr:primaryType="jnt:folder">
+                                <META-INF jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                               jcr:primaryType="jnt:metaInfFolder">
+                                    <spring jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                                jcr:primaryType="jnt:folder">
+                                        <stackoverflow-connector.xml jcr:primaryType="jnt:xmlFile"/>
+                                    </spring>
+                                </META-INF>
+                            </resources>
+                            <java jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                        jcr:primaryType="jnt:javaPackageFolder">
+                                <org jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                          jcr:primaryType="jnt:javaPackageFolder">
+                                    <jahia jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                               jcr:primaryType="jnt:folder">
+                                        <modules jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                                    jcr:primaryType="jnt:javaPackageFolder">
+                                            <stackoverflow jcr:mixinTypes="jmix:hasExternalProviderExtension"
+                                             jcr:primaryType="jnt:javaPackageFolder">
+                                                <SlackNotificationJob.java jcr:primaryType="jnt:javaSourceFile"/>
+                                            </stackoverflow>
+                                        </modules>
+                                    </jahia>
+                                </org>
+                            </java>
+                        </main>
+                    </src>
+                </sources>
+                
+                <portlets jcr:primaryType="jnt:portletFolder"/>
+                <files jcr:primaryType="jnt:folder"/>
+                <contents jcr:primaryType="jnt:contentFolder"/>
+                <templates j:rootTemplatePath="/base" jcr:primaryType="jnt:templatesFolder">
+                    <files jcr:primaryType="jnt:folder"/>
+                    <contents jcr:primaryType="jnt:contentFolder"/>
+                </templates>
+                
+            </stackoverflow-connector>
+    </modules>
+</content>
