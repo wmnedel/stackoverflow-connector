@@ -9,6 +9,8 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -85,6 +87,19 @@ public class HttpConnector {
         this.errorMessage = new StringBuilder();
     }
 
+    /**     
+     * Constructor for HttpConnectionHelper
+     * @param hostName  Name of the host
+     * @param scheme    http/https
+     * @param port      Port number
+     */
+    public HttpConnector(String hostName, String scheme, int port) {
+        this.hostName = hostName;
+        this.scheme = scheme;
+        this.port = port;
+        this.errorMessage = new StringBuilder();
+    }
+
     private void prepareConnection() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 
         if (this.scheme.equalsIgnoreCase(HTTPS_SCHEME)) {
@@ -93,15 +108,18 @@ public class HttpConnector {
             this.targetHost = new HttpHost(hostName, port, HTTP_SCHEME);
         }
 
-        CredentialsProvider credsProvider = new BasicCredentialsProvider();
-        credsProvider.setCredentials(AuthScope.ANY,
-                new UsernamePasswordCredentials(userName, password));
-
         AuthCache authCache = new BasicAuthCache();
         authCache.put(targetHost, new BasicScheme());
 
         this.context = HttpClientContext.create();
-        context.setCredentialsProvider(credsProvider);
+
+        if(this.userName != null && !this.userName.isEmpty()) {
+            CredentialsProvider credsProvider = new BasicCredentialsProvider();
+            credsProvider.setCredentials(AuthScope.ANY,
+                    new UsernamePasswordCredentials(userName, password));
+            context.setCredentialsProvider(credsProvider);
+        }
+
         context.setAuthCache(authCache);
 
         TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
@@ -119,7 +137,8 @@ public class HttpConnector {
                 new BasicHttpClientConnectionManager(socketFactoryRegistry);
 
         this.client = HttpClients.custom().setSSLSocketFactory(sslsf)
-                .setConnectionManager(connectionManager).build();
+                .setConnectionManager(connectionManager).setDefaultRequestConfig(RequestConfig.custom()
+                        .setCookieSpec(CookieSpecs.IGNORE_COOKIES).build()).build();
     }
 
     /**     

@@ -9,7 +9,7 @@
         <property name="trigger">
             <bean class="org.quartz.CronTrigger">
                 <property name="name" value="ReferentielJobTrigger"/>
-                <property name="cronExpression" value="${topPagesCronExp:0 0/1 * * * ?}"/>
+                <property name="cronExpression" value="${topPagesCronExp:0 0/10 * * * ?}"/>
             </bean>
         </property>
         <property name="jobDetail">
@@ -20,8 +20,6 @@
                 <property name="description" value="Job to search for stackoverflow unanswered questions with configured tag and notify in Slack" />
                 <property name="jobDataAsMap">
                     <map>
-                        <entry key="slackUrl" value="https://hooks.slack.com/services/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" />
-                        <entry key="stackApiURL" value="api.stackexchange.com" />
                         <entry key="tag" value="jahia" />
                     </map>
                 </property>

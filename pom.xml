@@ -57,7 +57,7 @@
     <groupId>org.jahia.modules</groupId>
     <artifactId>stackoverflow-connector</artifactId>
     <name>stackoverflow-connector</name>
-    <version>1.0-SNAPSHOT</version>    
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
     <description>This is the custom module (stackoverflow-connector) for running on a Digital Experience Manager server.</description>
 
